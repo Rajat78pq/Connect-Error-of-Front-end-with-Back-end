@@ -1,14 +1,16 @@
 import express from 'express';
 import { Request, Response } from 'express';
+import cors from 'cors';
 
 const App = express();
 
 App.use(express.json());
+App.use(cors());
 
-const PORT:number = 8000;
+const PORT:number = 8001;
 
 App.listen(PORT, ()=>{
-    console.log("App listen 'http://localhost:3000' ");
+    console.log("App listen 'http://localhost:8001' ");
 })
 
 App.get('/', ()=>{
@@ -23,3 +25,9 @@ App.get('/api/data', (req : Request, res: Response)=>{
     res.json(data);
     console.log(data);
 });
+
+const corsOptions = {
+    origin: 'http://localhost:5173',
+  };
+  
+  App.use(cors(corsOptions));
